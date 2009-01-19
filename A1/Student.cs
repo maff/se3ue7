@@ -5,17 +5,19 @@ using System.Text;
 
 namespace A1
 {
-    class Student
+    [Serializable()]
+    public class Student
     {
         public Student()
         {
         }
 
-        public Student(string vorname, string nachname, int matrikelnummer)
+        public Student(string vorname, string nachname, int matrikelnummer, bool?[] anwesenheit)
         {
             this.Vorname = vorname;
             this.Nachname = nachname;
             this.Matrikelnummer = matrikelnummer;
+            this.Anwesenheit = anwesenheit;
         }
 
         private string _vorname;
@@ -37,6 +39,13 @@ namespace A1
         {
             get { return this._matrikelnummer; }
             set { this._matrikelnummer = value; }
+        }
+
+        private bool?[] _anwesenheit;
+        public bool?[] Anwesenheit
+        {
+            get { return this._anwesenheit; }
+            set { this._anwesenheit = value; }
         }
 
         public string toString()

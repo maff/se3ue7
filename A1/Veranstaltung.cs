@@ -5,10 +5,12 @@ using System.Text;
 
 namespace A1
 {
-    class Veranstaltung
+    [Serializable()]
+    public class Veranstaltung
     {
-        public List<Veranstaltungstermin> Termine = new List<Veranstaltungstermin>();
-        public List<Student> Studenten = new List<Student>();
+        public Veranstaltung()
+        {
+        }
 
         private string _titel;
         public string Titel
@@ -29,6 +31,33 @@ namespace A1
         {
             get { return this._semester; }
             set { this._semester = value; }
+        }
+
+        public void addStudent(Student student)
+        {
+            if (student.Anwesenheit.Length != this.Termine.Count)
+                throw new ArgumentException("Anzahl der Anwesenheitseinträge muss gleich der Anzahl der Termine sein.");
+
+            this.Studenten.Add(student);
+        }
+
+        public void addTermin(Termin termin)
+        {
+            this.Termine.Add(termin);
+        }
+
+        private List<Termin> _termine = new List<Termin>();
+        public List<Termin> Termine
+        {
+            get { return this._termine; }
+            set { this._termine = value; }
+        }
+
+        private List<Student> _studenten = new List<Student>();
+        public List<Student> Studenten
+        {
+            get { return this._studenten; }
+            set { this._studenten = value; }
         }
 
         public string toString()

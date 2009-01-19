@@ -4,5 +4,4 @@ obj
 *results.xml
 *.suo
 *.zip
-Program.cs
 DataHelper.cs
