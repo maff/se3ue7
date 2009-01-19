@@ -12,21 +12,29 @@ namespace A1
     {
         static void Main(string[] args)
         {
+            /* external method to retrieve data (should not be published) */
             Veranstaltung lv = DataHelper.GetData();
 
-            serializeBinaryFormatter("veranstaltungen.bin", lv);
             serializeXml("veranstaltungen.xml", lv);
+            serializeBinaryFormatter("veranstaltungen.bin", lv);
+
+            Veranstaltung fromXml = deserializeXml("veranstaltungen.xml");
+            Veranstaltung fromBinaryFormatter = deserializeBinaryFormatter("veranstaltungen.bin");
+
             
             Console.ReadLine();
         }
-
+        
+        /**
+         * TODO: implement BinaryWriter/Reader
+         * 
         public static void serializeBinary(string path, Veranstaltung lv)
         {
         }
 
         public static Veranstaltung deserializeBinary(string path)
         {
-        }
+        }*/
 
         public static void serializeXml(string path, Veranstaltung lv)
         {
@@ -39,7 +47,7 @@ namespace A1
         public static Veranstaltung deserializeXml(string path)
         {
             XmlSerializer xmlSer = new XmlSerializer(typeof(Veranstaltung));
-            FileStream fs = new FileStream(path, 117, FileMode.Open);
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             return (Veranstaltung)xmlSer.Deserialize(fs);
         }
 
@@ -54,7 +62,7 @@ namespace A1
         public static Veranstaltung deserializeBinaryFormatter(string path)
         {
             BinaryFormatter binFor = new BinaryFormatter();
-            FileStream fs = new FileStream(path, 117, FileMode.Open);
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             return (Veranstaltung)binFor.Deserialize(fs);
         }
     }
